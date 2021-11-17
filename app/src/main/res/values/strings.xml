@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SpannableString</string>
+
+    <string name="string">這是一段String&#160;你看到了</string>
+    <string name="github">這是一個Github&#160;你看到了</string>
 </resources>

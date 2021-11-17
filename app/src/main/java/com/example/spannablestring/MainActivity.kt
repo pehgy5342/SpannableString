@@ -5,31 +5,44 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.SpannableStringBuilder
 import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.text.style.BackgroundColorSpan
+import android.text.style.TextAppearanceSpan
+import android.text.style.URLSpan
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
-    val lyrics1 = "太多人愛抱怨但hustle程度接近zero"
-    val lyrics2 = "當個厭世少年沒用 只會更加emo"
-    val lyrics3 = "沒啥成就不是因為個性平凡"
-    val lyrics4 = "是你踏不出舒適圈 打破惡性循環"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        changeTextAppearance()
+        setTextStyle()
+        setTextLink()
 
     }
 
-    private fun changeTextAppearance() {
-        val text = findViewById<TextView>(R.id.text)
-        val spannable = SpannableStringBuilder()
-        spannable.append(lyrics1)
-        spannable.setSpan(BackgroundColorSpan(Color.YELLOW), 7, 13, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        text.text = spannable
+    private fun setTextStyle() {
+        val tv_string = findViewById<TextView>(R.id.string)
+        val spannable = SpannableStringBuilder(getString(R.string.string))
+
+        spannable.setSpan(BackgroundColorSpan(Color.BLUE), 4, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannable.setSpan(
+            TextAppearanceSpan(this, R.style.CustomTextStyle), 4, 10, Spanned.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+        tv_string.text = spannable
+        tv_string.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun setTextLink() {
+        val tv_link = findViewById<TextView>(R.id.link)
+        val spannable = SpannableStringBuilder(getString(R.string.github))
+        spannable.setSpan(URLSpan("https://github.com/"), 4, 10, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tv_link.text = spannable
+        tv_link.movementMethod = LinkMovementMethod.getInstance()
+
+
     }
 
 }
